@@ -13,12 +13,6 @@ DRV8833 driver = DRV8833();
 const int inputA1 = 5, inputA2 = 6;
 const int inputB1 = 9, inputB2 = 10;
 
-// ----- motors
-int IN1 = 5;                    // MOTOR A , left motor
-int IN2 = 6;
-int IN3 = 9;                    // MOTOR B. right motor
-int IN4 = 10;
-
 // ---- bluetooth
 int bluetoothTx = 2;
 int bluetoothRx = 3;
