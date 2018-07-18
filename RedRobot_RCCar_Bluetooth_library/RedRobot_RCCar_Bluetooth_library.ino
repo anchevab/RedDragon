@@ -1,5 +1,5 @@
 /*
-   RedRobot RC Bluetooth Car
+   RedDragon RC Bluetooth Car
    Byala Robots Club
    Author eng.Anton Anchev
    Byala, january 2018
@@ -14,7 +14,7 @@ const int inputA1 = 5, inputA2 = 6;
 const int inputB1 = 9, inputB2 = 10;
 
 // ---- bluetooth
-int bluetoothTx = 2;
+int bluetoothTx = 4;
 int bluetoothRx = 3;
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
 
@@ -29,10 +29,6 @@ void setup() {
   driver.attachMotorA(inputA1, inputA2);           // left motor T1
   driver.attachMotorB(inputB1, inputB2);           // right motor T2
   //  Serial.println("Ready!");
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);
 }
 
 // =================== LOOP ================
@@ -93,32 +89,20 @@ void loop() {
     //--------------------------- FORWARD -----------------------------
     if (inp_char == 'F') {
       //      Serial.println("Forward:");
-      //----------- FORWARD MOTOR A
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, LOW);
-      analogWrite(IN1, speed);
-      //----------- FORWARD MOTOR B
-      digitalWrite(IN3, HIGH);
-      digitalWrite(IN4, LOW);
-      analogWrite(IN3, speed);
+      driver.motorAForward(speed);
+      driver.motorBForward(speed);
     }
     //------------------------ FORWARD-LEFT ---------------------------
     if (inp_char == 'G') {
       //      Serial.println("Forward-Left:");
-      //----------- FORWARD MOTOR A
-      digitalWrite(IN1, HIGH);
-      digitalWrite(IN2, LOW);
-      analogWrite(IN1, speed * 0.7);
-      //----------- FORWARD MOTOR B
-      digitalWrite(IN3, HIGH);
-      digitalWrite(IN4, LOW);
-      analogWrite(IN3, speed);
+      driver.motorAForward(speed * 0.65);              // left motor T1
+      driver.motorBForward(speed);                     // right motor T2
     }
     //------------------------- FORWARD-RIGHT -------------------------
     if (inp_char == 'I') {
       //      Serial.println("Forward-Right:");
       driver.motorAForward(speed);                     // left motor T1
-      driver.motorBForward(speed * 0.7);               // right motor T2
+      driver.motorBForward(speed * 0.65);              // right motor T2
     }
     // -------------------------------------------- BACKWARD ------------------------------------------
     if (inp_char == 'B') {
@@ -129,25 +113,25 @@ void loop() {
     // -------------------------------------------- BACKWARD-LEFT ------------------------------------------
     if (inp_char == 'H') {
       //      Serial.println("Reverse-Left:");
-      driver.motorAReverse(speed * 0.7);               // left motor T1
+      driver.motorAReverse(speed * 0.65);              // left motor T1
       driver.motorBReverse(speed);                     // right motor T2
     }
     // -------------------------------------------- BACKWARD-RIGHT ------------------------------------------
     if (inp_char == 'J') {
       //      Serial.println("Reverse-Right:");
       driver.motorAReverse(speed);                     // left motor T1
-      driver.motorBReverse(speed * 0.7);               // right motor T2
+      driver.motorBReverse(speed * 0.65);              // right motor T2
     }
     // ------------------------------------------- TURN RIGHT ------------------------------------------
     if (inp_char == 'R') {
       //      Serial.println("Right:");
       driver.motorAForward(speed);                    // left motor T1
-      driver.motorBForward(speed * 0.4);              // right motor T2
+      driver.motorBForward(speed * 0.3);              // right motor T2
     }
     // ------------------------------------------- TURN LEFT --------------------------------------------
     if (inp_char == 'L') {
       //      Serial.println("Left:");
-      driver.motorAForward(speed * 0.4);              // left motor T1
+      driver.motorAForward(speed * 0.3);              // left motor T1
       driver.motorBForward(speed);                    // right motor T2
     }
     // ------------------------------------------ STOP ----------------------------------------------------
